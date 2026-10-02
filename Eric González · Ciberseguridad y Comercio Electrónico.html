@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eric González · Ciberseguridad y Comercio Electrónico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef2f6;--panel:#ffffff;--ink:#12202f;--muted:#51606f;--line:#cdd7e1;--accent:#1d5fc4;--accent-ink:#ffffff;--tag:#dfe9f7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1722;--panel:#152233;--ink:#e8eef5;--muted:#9fb0c1;--line:#28394d;--accent:#6aa5f5;--accent-ink:#0e1722;--tag:#1d3350}}
+:root[data-theme="dark"]{--bg:#0e1722;--panel:#152233;--ink:#e8eef5;--muted:#9fb0c1;--line:#28394d;--accent:#6aa5f5;--accent-ink:#0e1722;--tag:#1d3350}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "IBM Plex Sans",system-ui,sans-serif}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:340px 1fr;gap:56px}
+aside{position:sticky;top:0;align-self:start;padding:64px 0 40px;height:fit-content}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;margin:0;line-height:1.1}
+h1{font-size:clamp(2.6rem,5vw,3.6rem);font-weight:800;letter-spacing:-.02em}
+.role{margin:16px 0 0;font-size:1.05rem;color:var(--muted)}
+nav{margin:36px 0;display:flex;flex-direction:column;gap:2px}
+nav a{color:var(--ink);text-decoration:none;padding:6px 0 6px 14px;border-left:2px solid var(--line);font-weight:500}
+nav a:hover{border-color:var(--accent);color:var(--accent)}
+.contact{display:flex;flex-direction:column;gap:6px;font-size:.95rem;color:var(--muted);word-break:break-word}
+.contact a{color:var(--ink)}
+.btn{display:inline-block;margin-top:24px;background:var(--accent);color:var(--accent-ink);padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:600}
+.btn:hover{filter:brightness(1.1)}
+main{padding:64px 0 80px}
+section{margin-bottom:56px}
+h2{font-size:1.7rem;font-weight:700;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.lead{font-size:1.2rem;max-width:62ch}
+.item{padding:16px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:4px 24px}
+.item:last-child{border-bottom:0}
+.item h3{font-size:1.15rem;font-weight:700}
+.item p{margin:2px 0 0;color:var(--muted);grid-column:1}
+.when{color:var(--muted);font-size:.9rem;text-align:right;white-space:nowrap}
+.now{display:inline-block;background:var(--tag);color:var(--accent);padding:1px 10px;border-radius:99px;font-size:.8rem;font-weight:600;margin-left:8px;vertical-align:2px}
+.proj{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px;margin-bottom:16px}
+.proj h3{font-size:1.25rem;margin-bottom:10px}
+.proj ul{margin:0 0 14px;padding-left:20px}
+.proj li{margin:4px 0;max-width:68ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.tags li{background:var(--tag);color:var(--ink);padding:3px 12px;border-radius:99px;font-size:.88rem;margin:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.cols ul{margin:0;padding:0;list-style:none}
+.cols li{padding:9px 0 9px 20px;border-bottom:1px solid var(--line);position:relative}
+.cols li::before{content:"";position:absolute;left:0;top:19px;width:8px;height:8px;background:var(--accent);border-radius:2px}
+.cols h3{font-size:1.1rem;margin-bottom:6px}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:.9rem;grid-column:1/-1}
+@media (max-width:860px){
+.wrap{grid-template-columns:1fr;gap:0}
+aside{position:static;padding:40px 0 8px}
+nav{flex-direction:row;flex-wrap:wrap;gap:8px;margin:24px 0}
+nav a{border:1px solid var(--line);border-radius:99px;padding:4px 14px}
+main{padding-top:32px}
+.cols{grid-template-columns:1fr;gap:28px}
+.item{grid-template-columns:1fr}
+.when{text-align:left;white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.tools{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);padding:8px 14px;border-radius:6px;font:500 .9rem "IBM Plex Sans",sans-serif;cursor:pointer}
+.ghost:hover{border-color:var(--accent);color:var(--accent)}
+nav a.on{border-color:var(--accent);color:var(--accent);font-weight:600}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 18px}
+.chip{background:var(--panel);color:var(--ink);border:1px solid var(--line);padding:6px 16px;border-radius:99px;font:500 .9rem "IBM Plex Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+details.proj summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details.proj summary::-webkit-details-marker{display:none}
+details.proj summary::after{content:"+";font:700 1.5rem "Bricolage Grotesque",sans-serif;color:var(--accent);transition:transform .2s}
+details.proj[open] summary::after{transform:rotate(45deg)}
+details.proj[open] summary{margin-bottom:12px}
+details.proj[hidden]{display:none}
+.tags li.hl{background:var(--accent);color:var(--accent-ink)}
+.hint{color:var(--muted);font-size:.9rem;margin:-8px 0 16px}
+form{display:grid;gap:14px;max-width:560px}
+label{display:grid;gap:4px;font-weight:500;font-size:.95rem}
+input,textarea{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;width:100%}
+textarea{min-height:120px;resize:vertical}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:.25s;z-index:9}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="wrap">
+<aside>
+  <h1>Eric González</h1>
+  <p class="role">Estudiante de Ciberseguridad y Comercio Electrónico</p>
+  <nav aria-label="Secciones">
+    <a href="#perfil">Perfil</a>
+    <a href="#formacion">Formación</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#habilidades">Habilidades</a>
+    <a href="#cursos">Cursos</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <div class="contact">
+    <span>Penonomé, Coclé, Panamá</span>
+    <a href="tel:+50766098929">(507) 6609-8929</a>
+    <a href="mailto:ericgonzutp94@gmail.com">ericgonzutp94@gmail.com</a>
+    <a href="mailto:van74gogh12@gmail.com">van74gogh12@gmail.com</a>
+  </div>
+  <a class="btn" href="#contacto">Escríbeme</a>
+  <div class="tools">
+    <button class="ghost" id="copy" type="button">Copiar correo</button>
+  </div>
+</aside>
+
+<main>
+  <section id="perfil">
+    <h2>Perfil</h2>
+    <p class="lead">Soy un estudiante universitario responsable, con habilidades tecnológicas, buena organización y una excelente actitud de servicio. Busco una oportunidad laboral que me permita iniciar mi trayectoria profesional y adquirir nuevos conocimientos.</p>
+  </section>
+
+  <section id="formacion">
+    <h2>Formación académica</h2>
+    <div class="item">
+      <h3>Licenciatura en Gerencia de Comercio Electrónico <span class="now">En curso</span></h3>
+      <span class="when">2026 – Actualidad</span>
+      <p>Universidad de Panamá</p>
+    </div>
+    <div class="item">
+      <h3>Licenciatura en Ciberseguridad <span class="now">En curso</span></h3>
+      <span class="when">2024 – Actualidad</span>
+      <p>Universidad Tecnológica de Panamá</p>
+    </div>
+    <div class="item">
+      <h3>Bachiller en Comercio con Especialización en Contabilidad, Turismo y Énfasis en Informática</h3>
+      <span class="when">2022</span>
+      <p>Instituto Profesional Aurelio Villarreal</p>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <h2>Proyectos académicos</h2>
+    <div class="filters" role="group" aria-label="Filtrar proyectos">
+      <button class="chip" type="button" data-f="todos" aria-pressed="true">Todos</button>
+      <button class="chip" type="button" data-f="web" aria-pressed="false">Web</button>
+      <button class="chip" type="button" data-f="redes" aria-pressed="false">Redes y servidores</button>
+      <button class="chip" type="button" data-f="datos" aria-pressed="false">Bases de datos</button>
+    </div>
+    <p class="hint">Toca una herramienta para resaltarla en todos los proyectos.</p>
+    <details class="proj" data-cat="web" open>
+      <summary><h3>Tienda en línea ARE Computers</h3></summary>
+      <ul>
+        <li>Tienda virtual B2C de productos tecnológicos, desarrollada en un equipo de 3 integrantes y publicada en <a href="https://www.arecomputers.store" target="_blank" rel="noopener">www.arecomputers.store</a>.</li>
+        <li>Instalación y configuración de WordPress y WooCommerce (entorno local con LocalWP): catálogo por categorías, métodos de pago, envíos, impuestos y seguridad.</li>
+        <li>Migración a hosting de producción (Hostinger), publicación del dominio, diseño de marca y prototipo en Figma junto al equipo.</li>
+      </ul>
+      <ul class="tags"><li>WordPress</li><li>WooCommerce</li><li>LocalWP</li><li>Figma</li><li>Hostinger</li></ul>
+    </details>
+    <details class="proj" data-cat="redes" open>
+      <summary><h3>Servidor de archivos en Windows Server 2019</h3></summary>
+      <ul>
+        <li>Implementación de un servidor de archivos con Windows Server 2019.</li>
+        <li>Configuración y uso de FileZilla Server para la gestión de transferencias de archivos.</li>
+        <li>Creación y administración de usuarios, grupos y permisos de acceso.</li>
+        <li>Configuración básica de seguridad y control de accesos.</li>
+      </ul>
+      <ul class="tags"><li>Windows Server 2019</li><li>FileZilla Server</li><li>FTP</li><li>Gestión de permisos</li></ul>
+    </details>
+    <details class="proj" data-cat="web datos" open>
+      <summary><h3>Sistema de inventario (CRUD)</h3></summary>
+      <ul>
+        <li>Sistema de inventario de productos tecnológicos con operaciones CRUD.</li>
+        <li>Backend en PHP y base de datos en MySQL Workbench.</li>
+        <li>Ubuntu como servidor y frontend con CSS.</li>
+      </ul>
+      <ul class="tags"><li>PHP</li><li>MySQL</li><li>Ubuntu</li><li>CSS</li></ul>
+    </details>
+  </section>
+
+  <section id="habilidades">
+    <h2>Habilidades</h2>
+    <div class="cols">
+      <div>
+        <h3>Técnicas</h3>
+        <ul>
+          <li>Instalación y configuración de sistemas operativos</li>
+          <li>Conocimientos básicos en redes informáticas</li>
+          <li>Mantenimiento de PCs y equipos informáticos</li>
+          <li>Conocimientos en HTML y CSS</li>
+          <li>Uso de IA como apoyo para programar</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Profesionales</h3>
+        <ul>
+          <li>Responsabilidad y compromiso</li>
+          <li>Trabajo en equipo</li>
+          <li>Organización y gestión del tiempo</li>
+          <li>Capacidad de aprendizaje continuo</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="cursos">
+    <h2>Cursos y certificaciones</h2>
+    <div class="item">
+      <h3>Direccionamiento de red y solución de problemas básicos</h3>
+      <span class="when">2026</span>
+      <p>Cisco Networking Academy</p>
+    </div>
+    <div class="item">
+      <h3>Conceptos básicos de redes</h3>
+      <span class="when">2026</span>
+      <p>Cisco Networking Academy</p>
+    </div>
+    <div class="item">
+      <h3>Manejo intermedio de aplicaciones de ofimática</h3>
+      <span class="when">2023</span>
+      <p>Inadeh</p>
+    </div>
+  </section>
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p class="hint">Escribe tu mensaje y se abrirá tu app de correo listo para enviar.</p>
+    <form id="form">
+      <label>Tu nombre<input id="n" required autocomplete="name"></label>
+      <label>Tu correo<input id="e" type="email" required autocomplete="email"></label>
+      <label>Mensaje<textarea id="m" required></textarea></label>
+      <button class="btn" type="submit" style="border:0;cursor:pointer;font:600 1rem 'IBM Plex Sans',sans-serif;justify-self:start">Enviar mensaje</button>
+    </form>
+  </section>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<footer>© 2026 Eric González · Penonomé, Panamá</footer>
+</div>
+<script>
+(function(){
+var $=function(q,r){return Array.prototype.slice.call((r||document).querySelectorAll(q))};
+var toast=document.getElementById('toast'),tt;
+function say(t){toast.textContent=t;toast.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('show')},2200)}
+document.getElementById('copy').onclick=function(){
+  var mail='ericgonzutp94@gmail.com';
+  try{navigator.clipboard.writeText(mail).then(function(){say('Correo copiado')},function(){say(mail)})}catch(e){say(mail)}
+};
+$('.chip').forEach(function(b){b.onclick=function(){
+  $('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+  var f=b.dataset.f;
+  $('details.proj').forEach(function(d){d.hidden=!(f==='todos'||d.dataset.cat.split(' ').indexOf(f)>-1)});
+}});
+var active=null;
+$('.tags li').forEach(function(li){li.style.cursor='pointer';li.tabIndex=0;
+  function go(){var t=li.textContent;active=active===t?null:t;
+    $('.tags li').forEach(function(x){x.classList.toggle('hl',active!==null&&x.textContent===active)});}
+  li.onclick=go;li.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}};
+});
+var links=$('nav a');
+var io=new IntersectionObserver(function(es){es.forEach(function(en){
+  if(en.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id)})}
+})},{rootMargin:'-30% 0px -60% 0px'});
+$('main section').forEach(function(s){io.observe(s)});
+document.getElementById('form').onsubmit=function(ev){
+  ev.preventDefault();
+  var n=document.getElementById('n').value,e=document.getElementById('e').value,m=document.getElementById('m').value;
+  var body=encodeURIComponent(m+'\n\n— '+n+' ('+e+')');
+  var a=document.createElement('a');
+  a.href='mailto:ericgonzutp94@gmail.com?subject='+encodeURIComponent('Contacto desde tu sitio web: '+n)+'&body='+body;
+  a.click();say('Abriendo tu correo…');
+};
+})();
+</script>
+<script>
+(function(){
+var c=document.getElementById('bg'),x=c.getContext('2d'),W,H,D,pts=[],m={x:-999,y:-999},col='29,95,196',run=true;
+var calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function color(){
+  var v=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+  if(v[0]==='#'&&v.length===7){col=parseInt(v.substr(1,2),16)+','+parseInt(v.substr(3,2),16)+','+parseInt(v.substr(5,2),16)}
+}
+function size(){
+  D=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+  c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0);
+  var n=Math.min(90,Math.round(W*H/16000));pts=[];
+  for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:1.2+Math.random()*1.6});
+}
+function frame(){
+  x.clearRect(0,0,W,H);
+  for(var i=0;i<pts.length;i++){
+    var a=pts[i];
+    if(!calm){
+      a.x+=a.vx;a.y+=a.vy;
+      if(a.x<0||a.x>W)a.vx*=-1;
+      if(a.y<0||a.y>H)a.vy*=-1;
+      var dx=a.x-m.x,dy=a.y-m.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120&&d>0){a.x+=dx/d*1.2;a.y+=dy/d*1.2}
+    }
+    x.beginPath();x.arc(a.x,a.y,a.r,0,6.283);x.fillStyle='rgba('+col+',.55)';x.fill();
+    for(var j=i+1;j<pts.length;j++){
+      var b=pts[j],ex=a.x-b.x,ey=a.y-b.y,e=ex*ex+ey*ey;
+      if(e<19600){x.strokeStyle='rgba('+col+','+(0.28*(1-e/19600))+')';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}
+    }
+    var mx=a.x-m.x,my=a.y-m.y,md=mx*mx+my*my;
+    if(md<26000){x.strokeStyle='rgba('+col+','+(0.5*(1-md/26000))+')';x.beginPath();x.moveTo(a.x,a.y);x.lineTo(m.x,m.y);x.stroke()}
+  }
+  if(run&&!calm)requestAnimationFrame(frame);
+}
+addEventListener('mousemove',function(e){m.x=e.clientX;m.y=e.clientY});
+addEventListener('touchmove',function(e){var t=e.touches[0];m.x=t.clientX;m.y=t.clientY},{passive:true});
+addEventListener('touchend',function(){m.x=m.y=-999});
+addEventListener('resize',function(){size();if(calm)frame()});
+document.addEventListener('visibilitychange',function(){run=!document.hidden;if(run&&!calm)frame()});
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(){setTimeout(color,50)});
+color();size();frame();
+})();
+</script>
+</body>
+</html>
